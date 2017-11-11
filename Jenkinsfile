@@ -17,7 +17,7 @@ pipeline {
 
       stage('Unit Tests'){
         steps{
-          sh 'sudo docker-compose -f $WORKSPACE/docker-compose-test.yml run web -e BACKEND_API_CODE="$WORKSPACE" --entrypoint /bin/sh -c "python /app/myproject/manage.py test""'
+          sh 'sudo docker-compose -f $WORKSPACE/docker-compose-test.yml run web -e BACKEND_API_CODE="$WORKSPACE" --entrypoint /bin/sh -c "python /app/myproject/manage.py test"'
         }
       }
 
