@@ -7,12 +7,16 @@ pipeline {
       stage('Build'){
         steps {
           sh 'env'
-          sh 'sudo docker-compose -f $WORKSPACE/docker-compose-db.yml up -d'
+          sh 'docker-compose -f $WORKSPACE/docker-compose-db.yml up -d'
         }
 
         post {
+          always {
+             sh 'docker-compose -f $WORKSPACE/docker-compose-db.yml down'
+             deleteDir()
+          }
           failure {
-             sh 'sudo docker-compose -f $WORKSPACE/docker-compose-db.yml down'
+             sh 'docker-compose -f $WORKSPACE/docker-compose-db.yml down'
              deleteDir()
           }
         }
