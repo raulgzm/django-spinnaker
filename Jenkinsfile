@@ -2,10 +2,6 @@
 pipeline {
     agent any
 
-    environment {
-        BUILD_WORKSPACE = "${env.WORKSPACE.replace(env.JENKINS_JOBS, '/var/jenkins_home/jobs')}"
-    }
-
     stages{
 
       stage('Build'){
