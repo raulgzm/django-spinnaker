@@ -22,13 +22,13 @@ pipeline {
 
       stage('Unit Tests'){
         steps{
-          sh 'sudo docker-compose -f docker/docker-compose-local.yml run --entrypoint /bin/sh api -c "pip install -r /requirements/local.txt;"'
+          sh 'sudo docker-compose -f $WORKSPACE/docker-compose-local.yml run --entrypoint /bin/sh api -c "pip install -r /requirements/local.txt;"'
         }
 
         post {
           always {
-            sh 'sudo docker-compose -f docker/docker-compose-db.yml down --volume'
-            sh 'sudo docker-compose -f docker/docker-compose-local.yml down --volume'
+            sh 'sudo docker-compose -f $WORKSPACE/docker-compose-db.yml down --volume'
+            sh 'sudo docker-compose -f $WORKSPACE/docker-compose-local.yml down --volume'
           }
           failure {
              sh 'sudo docker-compose -f $WORKSPACE/docker-compose-db.yml down'
