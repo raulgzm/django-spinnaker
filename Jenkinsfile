@@ -18,11 +18,12 @@ pipeline {
           python manage.py test
         }
         post {
-            always {
-               sh rm -r /myproject/
-            }
-            failure {
-            }
+          always {
+            sh rm -r /myproject/
+          }
+          failure {
+            sh rm -r /myproject/
+          }
         }
       }
 
