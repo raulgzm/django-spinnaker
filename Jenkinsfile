@@ -2,8 +2,11 @@
 pipeline {
     agent any
 
-    stages{
+    environment {
+        BACKEND_API_CODE = $WORKSPACE
+    }
 
+    stages{
       stage('Build'){
         steps {
           sh 'env'
@@ -22,7 +25,7 @@ pipeline {
 
       stage('Unit Tests'){
         steps{
-          sh 'sudo docker-compose -f $WORKSPACE/docker-compose-local.yml run --entrypoint /bin/sh api -c "pip install -r /requirements/local.txt;"'
+          sh 'sudo docker-compose -f $WORKSPACE/docker-compose-local.yml run --entrypoint /bin/sh "python manage.py test"'
         }
 
         post {
