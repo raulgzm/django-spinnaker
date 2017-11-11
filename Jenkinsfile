@@ -15,10 +15,10 @@ pipeline {
         }
         post {
           always {
-            sh rm -r /myproject/
+            sh 'rm -r /myproject/'
           }
           failure {
-            sh rm -r /myproject/
+            sh 'rm -r /myproject/'
           }
         }
       }
