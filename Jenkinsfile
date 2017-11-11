@@ -7,7 +7,7 @@ pipeline {
       stage('Build'){
         steps {
           sh 'env'
-          sh 'pip install -r $WORKSPACE/requirements/local.txt'
+          sh 'sudo pip install -r $WORKSPACE/requirements/local.txt'
         }
       }
 
