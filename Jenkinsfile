@@ -10,7 +10,7 @@ pipeline {
         }
         post {
           failure {
-            sh 'rm -r /myproject/'
+            sh 'rm -r $WORKSPACE/myproject/'
           }
         }
       }
@@ -18,15 +18,14 @@ pipeline {
       stage('Unit Test'){
       steps {
           sh 'env'
-          sh '/myproject/bin/activate'
-          sh 'cd /webapps/django-docker/myproject/'
-          sh 'pip install -r ../requirements/local.txt'
-          sh 'python manage.py migrate'
-          sh 'python manage.py test'
+          sh '$WORKSPACE/myproject/bin/activate'
+          sh 'pip install -r $WORKSPACE/requirements/local.txt'
+          sh 'python $WORKSPACE/myproject/manage.py migrate'
+          sh 'python $WORKSPACE/myproject/manage.py test'
         }
         post {
           always {
-            sh 'rm -r /myproject/'
+            sh 'rm -r $WORKSPACE/myproject/'
           }
         }
       }
