@@ -6,12 +6,12 @@ pipeline {
 
       stage('Build'){
         steps {
-          sh virtualenv -p /usr/bin/python3.4 myproject
-          source /myproject/bin/activate
-          cd /webapps/django-docker/myproject/
-          pip install -r ../requirements/local.txt
-          python manage.py migrate
-          python manage.py test
+          sh 'virtualenv -p /usr/bin/python3.4 myproject'
+          sh 'source /myproject/bin/activate'
+          sh 'cd /webapps/django-docker/myproject/'
+          sh 'pip install -r ../requirements/local.txt'
+          sh 'python manage.py migrate'
+          sh 'python manage.py test'
         }
         post {
           always {
