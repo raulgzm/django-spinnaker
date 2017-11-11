@@ -7,15 +7,16 @@ pipeline {
       stage('Build'){
         steps {
           sh 'env'
-          sh 'sudo pip install -r $WORKSPACE/requirements/local.txt'
+          sh 'docker-compose -f $WORKSPACE/docker-compose-db.yml up -d'
         }
-      }
 
-      stage('Unit Test'){
-        steps {
-            sh 'python $WORKSPACE/myproject/manage.py migrate'
-            sh 'python $WORKSPACE/myproject/manage.py test'
+        post {
+          failure {
+             sh 'docker-compose -f docker/docker-compose-db.yml down'
+             deleteDir()
+          }
         }
+
       }
 
     }
