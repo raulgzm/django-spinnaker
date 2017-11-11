@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     environment {
-        BACKEND_API_CODE = $WORKSPACE
+        BACKEND_API_CODE = "$WORKSPACE"
     }
 
     stages{
