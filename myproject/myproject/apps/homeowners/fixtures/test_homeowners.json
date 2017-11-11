@@ -1,0 +1,1 @@
+[{"model": "homeowners.homeowner", "pk": 1, "fields": {"created_at": "2017-11-10T15:14:02.348Z", "updated_at": "2017-11-10T15:14:02.348Z", "user": 3}}, {"model": "homeowners.homeowner", "pk": 2, "fields": {"created_at": "2017-11-10T15:14:07.897Z", "updated_at": "2017-11-10T15:14:07.897Z", "user": 2}}]

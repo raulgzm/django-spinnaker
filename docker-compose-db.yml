@@ -1,0 +1,13 @@
+version: '3'
+
+networks:
+  local:
+
+
+services:
+  db:
+    image: postgres
+    networks:
+        local:
+          aliases:
+            - db
