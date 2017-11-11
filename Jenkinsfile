@@ -12,9 +12,9 @@ pipeline {
       }
 
       stage('Unit Test'){
-      steps {
-          sh 'python $WORKSPACE/myproject/manage.py migrate'
-          sh 'python $WORKSPACE/myproject/manage.py test'
+        steps {
+            sh 'python $WORKSPACE/myproject/manage.py migrate'
+            sh 'python $WORKSPACE/myproject/manage.py test'
         }
       }
 
