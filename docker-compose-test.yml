@@ -8,16 +8,16 @@ services:
     build: .
     environment:
       - APP_ENVIRONMENT=local
-      - BACKEND_API_CODE=$BACKEND_API_CODE
-    working_dir: /myproject/
+      - BACKEND_API_CODE="/var/lib/jenkins/jobs/django-docker/branches/develop/workspace@2/"
+    working_dir: /app/
     volumes:
-      - "$BACKEND_API_CODE/myproject/:/myproject/"
+      - "/var/lib/jenkins/jobs/django-docker/branches/develop/workspace@2/:/app"
     entrypoint:
       - /bin/sh
       - -c
       - |
-          pip install -r /app/requirements/jenkins.txt
-          python manage.py test
+          pip install -r /app/requirements/local.txt
+          python /app/myproject/manage.py test
     ports:
       - "8000:8000"
     networks:
