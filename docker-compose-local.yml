@@ -3,10 +3,6 @@ version: '3'
 networks:
   local:
 
-volumes:
-  data-jenkins:
-    driver: "local"
-
 services:
   web:
     build: .
@@ -28,10 +24,3 @@ services:
       local:
         aliases:
           - web
-  jenkins:
-    image: "jenkins:2.19.2"
-    ports:
-      - "49001:8080"
-    restart: "always"
-    volumes:
-      - "data-jenkins:/var/jenkins_home"

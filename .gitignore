@@ -185,3 +185,5 @@ venv.bak/
 .mypy_cache/
 
 # End of https://www.gitignore.io/api/git,python,django,ansible,pycharm
+jenkins/tomcat
+jenkins/jenkins
