@@ -20,7 +20,7 @@ pipeline {
 
       stage('Unit Tests'){
         steps{
-          sh 'docker-compose -f $WORKSPACE/docker-compose-test.yml run --entrypoint /bin/sh web -c "python /app/myproject/manage.py test"'
+          sh 'docker-compose -f $WORKSPACE/docker-compose-test.yml run --entrypoint /bin/sh web -c "python /app/myproject/manage.py jenkins --enable-coverage"'
         }
 
         post {
