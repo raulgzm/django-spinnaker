@@ -27,11 +27,9 @@ pipeline {
         post {
           always {
             sh 'sudo docker-compose -f $WORKSPACE/docker-compose-db.yml down --volume'
-            sh 'sudo docker-compose -f $WORKSPACE/docker-compose-test.yml down --volume'
           }
           failure {
             sh 'sudo docker-compose -f $WORKSPACE/docker-compose-db.yml down'
-            sh 'sudo docker-compose -f $WORKSPACE/docker-compose-test.yml down'
           }
         }
       }
