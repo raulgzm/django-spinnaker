@@ -11,12 +11,10 @@ pipeline {
         steps {
           sh 'env'
           sh 'sudo docker-compose -f $WORKSPACE/docker-compose-db.yml up -d'
-          sh 'sudo docker-compose -f $WORKSPACE/docker-compose-test.yml up -d'
         }
         post {
           failure {
             sh 'sudo docker-compose -f $WORKSPACE/docker-compose-db.yml down'
-            sh 'sudo docker-compose -f $WORKSPACE/docker-compose-test.yml down'
           }
         }
       }
