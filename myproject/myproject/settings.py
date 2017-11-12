@@ -129,8 +129,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-JENKINS_TASKS = (
-    'django_jenkins.tasks.with_coverage',
-    'django_jenkins.tasks.run_pylint',
-)
 PROJECT_APPS = ['myproject']
