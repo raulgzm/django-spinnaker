@@ -7,8 +7,15 @@ services:
   web:
     build: .
     environment:
-      - APP_ENVIRONMENT=local
       - BACKEND_API_CODE=${BACKEND_API_CODE}
+      - APP_ENVIRONMENT=jenkins
+      - NAME=myproject
+      - DJANGO_SETTINGS_MODULE=myproject.settings
+      - DJANGODIR=/app/myproject/
+      - SECRET_KEY="1pa1(z8+uc6ylqw!*ebxc6q)&@3#@hk=)*e5rs2-kd2at^u_cv"
+      - PYTHONPATH=$DJANGODIR:$PYTHONPATH
+      - PYTHONDONTWRITEBYTECODE=1
+      - DJANGO_WSGI_MODULE=myproject.wsgi
     working_dir: /app/
     volumes:
       - "${BACKEND_API_CODE}:/app"
