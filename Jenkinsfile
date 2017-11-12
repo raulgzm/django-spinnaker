@@ -33,4 +33,16 @@ pipeline {
         }
       }
     }
+
+    post {
+        always {
+            sh 'ls -lh'
+            sh 'ls -lh /app/myproject/reports'
+            step([$class: 'JUnitResultArchiver', testResults: '/app/myproject/reports/junit.xml'])
+            step([$class: 'CoberturaPublisher', autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: '/app/myproject/reports/coverage.xml', failUnhealthy: false, failUnstable: false, maxNumberOfBuilds: 0, onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false])
+            deleteDir()
+            sh "docker rmi ${api.id} -f"
+        }
+    }
+
 }
