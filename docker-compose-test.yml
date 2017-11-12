@@ -15,15 +15,15 @@ services:
       - PYTHONPATH="${BACKEND_API_CODE}:"
       - PYTHONDONTWRITEBYTECODE=1
       - DJANGO_WSGI_MODULE=myproject.wsgi
-    working_dir: /app/
+    working_dir: /
     volumes:
       - "${BACKEND_API_CODE}:/app"
     entrypoint:
       - /bin/sh
       - -c
       - |
-          pip install -r /app/requirements/local.txt
-          python /app/myproject/manage.py jenkins --enable-coverage
+          pip install -r /requirements/local.txt
+          python /myproject/manage.py jenkins --enable-coverage
     ports:
       - "8000:8000"
     networks:
