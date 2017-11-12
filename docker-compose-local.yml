@@ -8,6 +8,7 @@ services:
     build: .
     environment:
       - APP_ENVIRONMENT=local
+      - BACKEND_API_CODE=$BACKEND_API_CODE
     working_dir: /myproject/
     volumes:
       - "$BACKEND_API_CODE/myproject/:/myproject/"
