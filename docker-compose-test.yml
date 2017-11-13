@@ -17,7 +17,7 @@ services:
       - DJANGO_WSGI_MODULE=myproject.wsgi
     working_dir: /
     volumes:
-      - /var/lib/jenkins/jobs/django-docker-dev/workspace:/app
+      - $BACKEND_API_CODE:/app
     entrypoint:
       - /bin/sh
       - -c
