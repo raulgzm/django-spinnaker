@@ -18,6 +18,7 @@ services:
     working_dir: /
     volumes:
       - "${BACKEND_API_CODE}:/app"
+      - /var/lib/jenkins/jobs/django-docker-dev/workspace:/app
     entrypoint:
       - /bin/sh
       - -c
