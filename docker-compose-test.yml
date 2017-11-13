@@ -23,7 +23,7 @@ services:
       - -c
       - |
           pip install -r /requirements/local.txt
-          python /myproject/manage.py test myproject.apps --with-xunit --xunit-file myproject/reports/junit.xml --with-coverage --cover-xml --cover-xml-file myproject/reports/coverage.xml
+          python /myproject/manage.py test myproject.apps --cover-package=myproject.apps --with-xunit --xunit-file myproject/reports/junit.xml --with-coverage --cover-xml --cover-xml-file myproject/reports/coverage.xml
     ports:
       - "8000:8000"
     networks:
