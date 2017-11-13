@@ -21,8 +21,6 @@ pipeline {
       stage('Unit Tests'){
         steps{
           sh 'docker-compose -f $WORKSPACE/docker-compose-test.yml run --entrypoint /bin/sh web -c "pip install -r /app/requirements/local.txt; python /app/myproject/manage.py jenkins myproject.apps --pythonpath /app/myproject/myproject/ --enable-coverage"'
-          sh 'mv coverage.xml reports/coverage.xml'
-          sh 'mv junit.xml reports/junit.xml'
         }
 
         post {

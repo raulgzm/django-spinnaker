@@ -24,6 +24,8 @@ services:
       - |
           pip install -r /requirements/local.txt
           python /myproject/manage.py jenkins myproject.apps --enable-coverage
+          mv /myproject/coverage.xml /myproject/reports/coverage.xml
+          mv /myproject/junit.xml /myproject/reports/junit.xml
     ports:
       - "8000:8000"
     networks:
