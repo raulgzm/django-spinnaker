@@ -1,0 +1,1 @@
+<testsuite errors="0" failures="0" name="Django Project Tests" skips="0" tests="1" time="0.044"><testcase classname="myproject.apps.homeowners.tests.test_models.HomeOwnersModelsTestCase" name="test_str_method" time="0.037982" /></testsuite>
