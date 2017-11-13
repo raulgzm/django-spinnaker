@@ -42,6 +42,7 @@ DJANGO_APPS = [
 PROJECT_APPS = [
     'myproject.apps.homeowners',
     'django_jenkins',
+    'django_nose',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS
@@ -128,3 +129,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=apps',
+]

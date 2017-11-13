@@ -23,7 +23,7 @@ services:
       - -c
       - |
           pip install -r /requirements/local.txt
-          python /myproject/manage.py jenkins myproject.apps --enable-coverage --output-dir /myproject/reports/
+          python /myproject/manage.py test myproject.apps --with-xunit --xunit-file reports/junit.xml --with-coverage --cover-xml --cover-xml-file reports/coverage.xml
     ports:
       - "8000:8000"
     networks:
