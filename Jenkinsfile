@@ -20,7 +20,7 @@ pipeline {
 
       stage('Unit Tests'){
         steps{
-          sh 'docker-compose -f $WORKSPACE/docker-compose-test.yml run"'
+          sh 'docker-compose -f $WORKSPACE/docker-compose-test.yml run'
         }
 
         post {
