@@ -43,10 +43,9 @@ pipeline {
             sh 'sudo chgrp jenkins $WORKSPACE/myproject/reports/coverage.xml'
             sh 'sudo chgrp jenkins $WORKSPACE/myproject/reports/junit.xml'
             sh 'ls -lh $WORKSPACE/myproject/reports'
-            step([$class: 'JUnitResultArchiver', testResults: '$WORKSPACE/myproject/reports/junit.xml'])
-            junit '$WORKSPACE/myproject/reports/junit.xml'
-            junit '**/reports/junit/*.xml'
-            step([$class: 'CoberturaPublisher', autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: '$WORKSPACE/myproject/reports/coverage.xml', failUnhealthy: false, failUnstable: false, maxNumberOfBuilds: 0, onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false])
+            step([$class: 'JUnitResultArchiver', testResults: 'myproject/reports/junit.xml'])
+            junit 'myproject/reports/junit.xml'
+            step([$class: 'CoberturaPublisher', autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'myproject/reports/coverage.xml', failUnhealthy: false, failUnstable: false, maxNumberOfBuilds: 0, onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false])
         }
     }
 
