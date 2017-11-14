@@ -23,19 +23,14 @@ pipeline {
 
     environment {
         BACKEND_API_CODE = "$WORKSPACE"
-        MONITOR_URL = 'http://192.168.33.56/projects/85ef55a4-fc3a-4c4b-a48e-7f2a50f665b0/status'
+        MONITOR_URL_DEV = 'http://192.168.33.56/projects/85ef55a4-fc3a-4c4b-a48e-7f2a50f665b0/status'
+        MONITOR_URL_MASTER = 'http://192.168.33.56/projects/a99955b5-aad2-4a5a-9260-5245952c4103/status'
     }
 
     stages{
       stage('Build'){
         steps {
           sh 'docker-compose -f $WORKSPACE/docker-compose-db.yml up -d'
-          if(env.BRANCH_NAME == 'master'){
-            MONITOR_URL = 'http://192.168.33.56/projects/a99955b5-aad2-4a5a-9260-5245952c4103/status'
-          }
-          else {
-            MONITOR_URL = 'http://192.168.33.56/projects/85ef55a4-fc3a-4c4b-a48e-7f2a50f665b0/status'
-          }
         }
         post {
           failure {
@@ -74,15 +69,33 @@ pipeline {
         }
 
         success {
-            notifyMonitor("SUCCESS", $MONITOR_URL)
+            script {
+              if (env.BRANCH_NAME == 'master') {
+                notifyMonitor("SUCCESS", $MONITOR_URL_MASTER)
+              } else {
+                notifyMonitor("SUCCESS", $MONITOR_URL_DEV)
+              }
+            }
         }
 
         unstable {
-            notifyMonitor("UNSTABLE", $MONITOR_URL)
+            script {
+              if (env.BRANCH_NAME == 'master') {
+                notifyMonitor("SUCCESS", $MONITOR_URL_MASTER)
+              } else {
+                notifyMonitor("SUCCESS", $MONITOR_URL_DEV)
+              }
+            }
         }
 
         failure {
-            notifyMonitor("FAILURE", $MONITOR_URL)
+            script {
+              if (env.BRANCH_NAME == 'master') {
+                notifyMonitor("SUCCESS", $MONITOR_URL_MASTER)
+              } else {
+                notifyMonitor("SUCCESS", $MONITOR_URL_DEV)
+              }
+            }
         }
     }
 
