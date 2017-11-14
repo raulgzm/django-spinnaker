@@ -69,21 +69,19 @@ pipeline {
         }
 
         success {
-            script {
-              if (env.BRANCH_NAME == 'master') {
-                notifyMonitor("SUCCESS", $MONITOR_URL_MASTER)
-              } else {
-                notifyMonitor("SUCCESS", $MONITOR_URL_DEV)
-              }
+            if (env.BRANCH_NAME == 'master') {
+              notifyMonitor("SUCCESS", $MONITOR_URL_MASTER)
+            } else {
+              notifyMonitor("SUCCESS", $MONITOR_URL_DEV)
             }
         }
 
         unstable {
             script {
               if (env.BRANCH_NAME == 'master') {
-                notifyMonitor("SUCCESS", $MONITOR_URL_MASTER)
+                notifyMonitor("UNSTABLE", $MONITOR_URL_MASTER)
               } else {
-                notifyMonitor("SUCCESS", $MONITOR_URL_DEV)
+                notifyMonitor("UNSTABLE", $MONITOR_URL_DEV)
               }
             }
         }
@@ -91,9 +89,9 @@ pipeline {
         failure {
             script {
               if (env.BRANCH_NAME == 'master') {
-                notifyMonitor("SUCCESS", $MONITOR_URL_MASTER)
+                notifyMonitor("FAILURE", $MONITOR_URL_MASTER)
               } else {
-                notifyMonitor("SUCCESS", $MONITOR_URL_DEV)
+                notifyMonitor("FAILURE", $MONITOR_URL_DEV)
               }
             }
         }
