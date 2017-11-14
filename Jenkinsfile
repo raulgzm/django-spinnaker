@@ -23,8 +23,8 @@ pipeline {
 
     environment {
         BACKEND_API_CODE = "$WORKSPACE"
-        MONITOR_URL_DEV = 'http://192.168.33.56/projects/85ef55a4-fc3a-4c4b-a48e-7f2a50f665b0/status'
-        MONITOR_URL_MASTER = 'http://192.168.33.56/projects/a99955b5-aad2-4a5a-9260-5245952c4103/status'
+        MONITOR_URL_DEV = "http://192.168.33.56/projects/85ef55a4-fc3a-4c4b-a48e-7f2a50f665b0/status"
+        MONITOR_URL_MASTER = "http://192.168.33.56/projects/a99955b5-aad2-4a5a-9260-5245952c4103/status"
     }
 
     stages{
