@@ -23,13 +23,7 @@ pipeline {
 
     environment {
         BACKEND_API_CODE = "$WORKSPACE"
-
-        if(env.BRANCH_NAME == 'master'){
-          MONITOR_URL = 'http://192.168.33.56/projects/a99955b5-aad2-4a5a-9260-5245952c4103/status'
-        }
-        else {
-          MONITOR_URL = 'http://192.168.33.56/projects/85ef55a4-fc3a-4c4b-a48e-7f2a50f665b0/status'
-        }
+        MONITOR_URL = 'http://192.168.33.56/projects/85ef55a4-fc3a-4c4b-a48e-7f2a50f665b0/status'
     }
 
     stages{
@@ -71,6 +65,13 @@ pipeline {
             sh 'ls -lh $WORKSPACE/myproject/reports'
             step([$class: 'JUnitResultArchiver', testResults: 'myproject/reports/junit.xml'])
             step([$class: 'CoberturaPublisher', autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'myproject/reports/coverage.xml', failUnhealthy: false, failUnstable: false, maxNumberOfBuilds: 0, onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false])
+
+            if(env.BRANCH_NAME == 'master'){
+              MONITOR_URL = 'http://192.168.33.56/projects/a99955b5-aad2-4a5a-9260-5245952c4103/status'
+            }
+            else {
+              MONITOR_URL = 'http://192.168.33.56/projects/85ef55a4-fc3a-4c4b-a48e-7f2a50f665b0/status'
+            }
         }
 
         success {
