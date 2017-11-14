@@ -15,7 +15,7 @@ def notifyMonitor(buildStatus, endpoint, buildPhase="FINALIZED") {
         ]
     ])
 
-    sh "curl --silent -XPOST -H 'Content-Type: application/json' -d '${payload}' ${endpoint}"
+    sh "curl --silent -X POST -H 'Content-Type: application/json' -d '${payload}' ${endpoint}"
 }
 
 pipeline {
