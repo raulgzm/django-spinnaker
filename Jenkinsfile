@@ -23,6 +23,13 @@ pipeline {
 
     environment {
         BACKEND_API_CODE = "$WORKSPACE"
+
+        if(env.BRANCH_NAME == 'master'){
+          MONITOR_URL = 'http://192.168.33.56/projects/a99955b5-aad2-4a5a-9260-5245952c4103/status'
+        }
+        else {
+          MONITOR_URL = 'http://192.168.33.56/projects/85ef55a4-fc3a-4c4b-a48e-7f2a50f665b0/status'
+        }
     }
 
     stages{
@@ -67,15 +74,15 @@ pipeline {
         }
 
         success {
-            notifyMonitor("SUCCESS", "http://192.168.33.56/projects/85ef55a4-fc3a-4c4b-a48e-7f2a50f665b0/status")
+            notifyMonitor("SUCCESS", $MONITOR_URL)
         }
 
         unstable {
-            notifyMonitor("UNSTABLE", "http://192.168.33.56/projects/85ef55a4-fc3a-4c4b-a48e-7f2a50f665b0/status")
+            notifyMonitor("UNSTABLE", $MONITOR_URL)
         }
 
         failure {
-            notifyMonitor("FAILURE", "http://192.168.33.56/projects/85ef55a4-fc3a-4c4b-a48e-7f2a50f665b0/status")
+            notifyMonitor("FAILURE", $MONITOR_URL)
         }
     }
 
