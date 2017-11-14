@@ -69,30 +69,47 @@ pipeline {
         }
 
         success {
-            if (env.BRANCH_NAME == 'master') {
-              notifyMonitor("SUCCESS", $MONITOR_URL_MASTER)
-            } else {
-              notifyMonitor("SUCCESS", $MONITOR_URL_DEV)
+            when {
+                expression { env.BRANCH_NAME == 'master' }
+            }
+            steps {
+                notifyMonitor("SUCCESS", $MONITOR_URL_MASTER)
+            }
+            when {
+                expression { env.BRANCH_NAME == 'develop' }
+            }
+            steps {
+                notifyMonitor("SUCCESS", $MONITOR_URL_DEV)
             }
         }
 
         unstable {
-            script {
-              if (env.BRANCH_NAME == 'master') {
+            when {
+                expression { env.BRANCH_NAME == 'master' }
+            }
+            steps {
                 notifyMonitor("UNSTABLE", $MONITOR_URL_MASTER)
-              } else {
+            }
+            when {
+                expression { env.BRANCH_NAME == 'develop' }
+            }
+            steps {
                 notifyMonitor("UNSTABLE", $MONITOR_URL_DEV)
-              }
             }
         }
 
         failure {
-            script {
-              if (env.BRANCH_NAME == 'master') {
+            when {
+                expression { env.BRANCH_NAME == 'master' }
+            }
+            steps {
                 notifyMonitor("FAILURE", $MONITOR_URL_MASTER)
-              } else {
+            }
+            when {
+                expression { env.BRANCH_NAME == 'develop' }
+            }
+            steps {
                 notifyMonitor("FAILURE", $MONITOR_URL_DEV)
-              }
             }
         }
     }
